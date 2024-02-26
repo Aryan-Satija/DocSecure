@@ -3,4 +3,5 @@ import { Signup } from './signup.js';
 import { Dashboard } from './dashboard.js';
 import { Validate } from './validate.js';
 import { Create } from './create.js';
-export {Login, Signup, Dashboard, Validate, Create};
+import { Home } from './home.js';
+export {Login, Signup, Dashboard, Validate, Create, Home};

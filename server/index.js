@@ -1,6 +1,7 @@
 require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
+const authRoutes = require('./routes/authRoutes.js');
 const PORT = process.env.PORT;
 const {connect} = require('./config/database.js');
 const app = express(); // creating express.js application
@@ -13,6 +14,8 @@ app.use(
 )
 
 connect()
+
+app.use("/api/v1/auth", authRoutes);
 
 // a route handler for the root URL ('/')
 app.get("/", (req, res)=>{

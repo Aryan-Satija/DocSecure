@@ -74,7 +74,7 @@ exports.sendotp = async()=>{
         if(!email){
             return res.status(400).json({
                 success: false,
-                message: 'user already exists'
+                message: 'email is required'
             })
         }
         
@@ -93,7 +93,7 @@ exports.sendotp = async()=>{
             specialChars: false
         })
 
-        await otp.create({email, otp});
+        await otp.create({email, user_otp});
 
         return res.status(200).json({
             success: true, 
@@ -129,7 +129,7 @@ exports.login = async (req, res) => {
             })
         }   
 
-        if(await bcrypt.compare(password, existing_user.pssword)){
+        if(await bcrypt.compare(password, existing_user.password)){
             const token = jwt.sign({email: existing_user.email, id: existing_user._id, accountType: existing_user.accountType}, process.env.JWT_SECRET);
             existing_user.token = token;
             existing_user.password = undefined;

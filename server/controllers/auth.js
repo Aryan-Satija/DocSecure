@@ -1,7 +1,7 @@
-const otp = require('../models/otp.js');
+const bcrypt = require('bcrypt');
+const OTP = require('../models/otp.js');
 const user = require('../models/user.js');
 const otpGenerator = require('otp-generator');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 exports.signup = async(req, res)=>{
     try{
@@ -29,7 +29,7 @@ exports.signup = async(req, res)=>{
             })
         }
 
-        const user_otp = await otp.find({email}).sort({createdAt: -1}).limit(1);
+        const user_otp = await OTP.find({email}).sort({createdAt: -1}).limit(1);
 
         if(user_otp.length === 0){
             return res.status(400).json({
@@ -68,7 +68,7 @@ exports.signup = async(req, res)=>{
     }
 }
 
-exports.sendotp = async()=>{
+exports.sendotp = async(req, res)=>{
     try{
         const {email} = req.body;
         if(!email){
@@ -93,7 +93,7 @@ exports.sendotp = async()=>{
             specialChars: false
         })
 
-        await otp.create({email, user_otp});
+        await OTP.create({email, otp:user_otp});
 
         return res.status(200).json({
             success: true, 

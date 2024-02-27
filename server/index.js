@@ -5,15 +5,18 @@ const authRoutes = require('./routes/authRoutes.js');
 const PORT = process.env.PORT;
 const {connect} = require('./config/database.js');
 const app = express(); // creating express.js application
-app.use(express.json()); // to parse incoming json data in the request's body
+
+connect()
+
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin :"*",
+        method:["PUT", "GET", "POST", "PATCH", "DELETE"],
         credentials: true
     })
 )
-
-connect()
+    
+app.use(express.json()); // to parse incoming json data in the request's body
 
 app.use("/api/v1/auth", authRoutes);
 

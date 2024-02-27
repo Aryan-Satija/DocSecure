@@ -13,15 +13,17 @@ export const Login = () => {
 
   const submitHandler = async(event)=>{
     event.preventDefault();
+    const id = toast.loading("Please wait...")
     try{
         const response = await apiConnector("POST", AUTH_APIS.login_api, {
           'email': formData.email,
           'password': formData.password
         })
-
+        console.log(response);
+        toast.update(id, { render: "Welcome", type: "success", isLoading: false });
     } catch(err){
       console.log(err);
-      
+      toast.update(id, { render: `${err?.response?.data?.message}`, type: "error", isLoading: false, autoClose: 5000})
     }
   }
 

@@ -125,7 +125,7 @@ exports.login = async (req, res) => {
         if(!existing_user){
             return res.status(401).json({
                 success: false,
-                mesage: 'user is not registered'
+                message: 'user is not registered'
             })
         }   
 

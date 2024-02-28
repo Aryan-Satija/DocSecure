@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import Spline from '@splinetool/react-spline';
 import OtpInput from 'react-otp-input';
+import { apiConnector } from '../services/apiConnector';
+import { AUTH_APIS } from '../services/auth_apis';
+import { toast } from 'react-toastify';
 
 export const Signup = () => {
   const [mode, setMode] = useState(0);
-  const [otpGenerated, setOtpGenerated] = useState(true);
+  const [otpGenerated, setOtpGenerated] = useState(false);
   const changeModeHandler = ()=>{
     setFormData(prev => {
       return {
@@ -22,7 +25,41 @@ export const Signup = () => {
   })
   const [otp, setOtp] = useState('');
 
-  const changeHandler = (event)=>{
+  const submitHandler = async(event)=>{
+    event.preventDefault();
+    const id = toast.loading("Please wait...")
+    try{
+        await apiConnector("POST", AUTH_APIS.sendotp_api, {
+          email: formData.email
+        })
+        toast.update(id, { render: "Otp sent successfully", type: "success", isLoading: false, autoClose: 5000});
+        setOtpGenerated(true);
+    } catch(err){
+      console.log(err);
+      toast.update(id, { render: `${err?.response?.data?.message}`, type: "error", isLoading: false, autoClose: 5000})
+    }
+  }
+
+  const otpValidate = async(event)=>{
+    event.preventDefault();
+    const id = toast.loading("Please wait...")
+    try{
+
+        const response = await apiConnector("POST", AUTH_APIS.signup_api, {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+          accountType: formData.accountType,
+          input_otp: otp
+        })
+        toast.update(id, { render: "Otp sent successfully", type: "success", isLoading: false, autoClose: 5000 });
+    } catch(err){
+      console.log(err);
+      toast.update(id, { render: `${err?.response?.data?.message}`, type: "error", isLoading: false, autoClose: 5000})
+    }
+  }
+
+  const changeHandler = (event)=>{ 
     setFormData(prev => {
       return {
         ...prev,
@@ -33,7 +70,10 @@ export const Signup = () => {
   return (
     <div className={otpGenerated ? 'bg-black h-screen flex flex-col md:flex-row-reverse w-screen' : 'bg-black h-screen flex flex-col md:flex-row-reverse w-screen pr-16' }>
     {
-      otpGenerated ? (<div className='w-full flex flex-col items-center justify-center'>
+        otpGenerated ? (<div className='w-full flex flex-col items-center justify-center'>
+        <div className='font-special text-sky-800 text-4xl pb-8'>
+          OTP HAS BEEN SHARED
+        </div>
         <OtpInput
           value={otp}
           onChange={setOtp}
@@ -44,12 +84,17 @@ export const Signup = () => {
             width: '70px',
             aspectRatio: '1/1',
             backgroundColor: 'gray',
-            opacity: '0.4',
+            opacity: '0.5',
             borderRadius: '10px',
             color: 'white'
           }}
-          shouldAutoFocus= {false}
+          shouldAutoFocus={false}
         />
+        <div>
+          <button onClick={(event)=>{
+              otpValidate(event);
+          }} className="w-full text-center mt-8 bg-sky-800 text-richblack-900 cursor-pointer rounded-[8px] px-[24px] py-[12px] duration-200 font-special hover:scale-95">SUBMIT</button>
+        </div>
       </div>) :
       (<>
         <div className='w-full md:w-[50%] md:h-full p-4 font-special flex flex-col md:justify-center gap-4'>
@@ -77,9 +122,12 @@ export const Signup = () => {
             <label htmlFor="password">Password:</label>
             <input id="password" name="password" className='bg-white/10 p-2 rounded-sm border-2 border-white/10 outline-none focus:border-white/40' type={'password'} onChange={changeHandler}/>
           </div>
+          <div>
+            <button onClick={(event)=>{submitHandler(event)}} className="w-full text-center bg-sky-800 text-richblack-900 cursor-pointer rounded-[8px] px-[24px] py-[12px] duration-200 hover:scale-95">SIGN UP</button>
+          </div>
         </div>
         <div className='w-full'>
-          <Spline scene="https://prod.spline.design/rrutDNoWYDohzI7J/scene.splinecode" />
+          <Spline scene="https://prod.spline.design/rrutDNoWYDohzI7J/scene.splinecode"/>
         </div>
       </>)
     }

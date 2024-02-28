@@ -31,6 +31,8 @@ exports.signup = async(req, res)=>{
 
         const user_otp = await OTP.find({email}).sort({createdAt: -1}).limit(1);
 
+        console.log(user_otp);
+
         if(user_otp.length === 0){
             return res.status(400).json({
                 success: false,
@@ -38,7 +40,8 @@ exports.signup = async(req, res)=>{
             })
         }
 
-        if(user_otp !== input_otp){
+
+        if(user_otp[0].otp !== input_otp){
             return res.status(400).json({
                 success: false,
                 message: 'incorrect otp'

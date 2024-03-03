@@ -23,7 +23,7 @@ app.use(express.json()); // to parse incoming json data in the request's body
 app.use(fileUpload());
 
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/auth", pdfRoutes);
+app.use("/api/v1/pdf", pdfRoutes);
 
 // a route handler for the root URL ('/')
 app.get("/", (req, res)=>{

@@ -1,4 +1,14 @@
 const pdfParse = require('pdf-parse');
+
+const crypto = require('crypto');
+
+function calculateHash(data) {
+    const hash = crypto.createHash('sha256');
+    hash.update(data);
+    return hash.digest('hex');
+}
+
+
 exports.pdfEncrypt = async(req, res)=>{
     try{
         if((!req.files) || (!req.files.pdfDocument)){
@@ -12,10 +22,10 @@ exports.pdfEncrypt = async(req, res)=>{
 
         pdfParse(pdfDocument)
         .then((result)=>{
-            console.log(result.text);
+            const hash = calculateHash(result.text)
             return res.status(200).json({
                 success: true,
-                data: result.text
+                data: hash
             })
         })
 

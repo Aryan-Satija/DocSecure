@@ -22,7 +22,7 @@ export const Create = () => {
       console.log(response);
   }
   return (
-    <div className='px-4 py-24'>
+    <div className='px-4 py-24 h-screen'>
       <div className='text-4xl text-gray-800/80 mb-8'>Secure Any Document....</div>
       <div className='flex flex-col lg:flex-row justify-around'>
         <form className='py-8 px-4'>

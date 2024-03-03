@@ -4,7 +4,7 @@ import {useNavigate, Link} from 'react-router-dom';
 export const Navbar = () => {
     const navigate = useNavigate();
     return (
-        <div className='flex items-center justify-between p-4 w-full border fixed bg-white'>
+        <div className='flex items-center justify-between p-4 w-full border fixed bg-white z-20'>
             <div>   
                 <MdVerifiedUser className='size-8 text-green-500'/>
             </div>

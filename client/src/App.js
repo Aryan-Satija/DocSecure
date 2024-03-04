@@ -1,15 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Login, Signup, Validate, Create, Dashboard, Home } from './pages';
-import { Navbar } from './components/navbar';
+import PrivateRoute from './components/privateRoute';
 function App() {
   return (
     <div>
       <div>
         <Routes>
-          <Route exact path="/" element={<Dashboard/>}>
-              <Route exact path="/validate" element={<Validate/>}/>
-              <Route exact path="/create" element={<Create/>}/>
+          <Route exact path="/" element={<PrivateRoute><Dashboard/></PrivateRoute>}>
+              <Route exact path="/validate" element={<PrivateRoute><Validate/></PrivateRoute>}/>
+              <Route exact path="/create" element={<PrivateRoute><Create/></PrivateRoute>}/>
               <Route exact path="/home" element={<Home/>}/>
           </Route>
           <Route exact path="/login" element={<Login/>}/>

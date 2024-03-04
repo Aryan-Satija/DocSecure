@@ -3,8 +3,12 @@ import Spline from '@splinetool/react-spline';
 import { AUTH_APIS } from '../services/auth_apis.js';
 import {apiConnector} from '../services/apiConnector.js';
 import { toast } from 'react-toastify';
-
+import { useDispatch } from 'react-redux'; 
+import { setToken } from '../slices/authSlice.js';
 export const Login = () => {
+
+  const dispatch = useDispatch();
+
 
   const [formData, setFormData] = useState({
     username: '',
@@ -20,10 +24,12 @@ export const Login = () => {
           'password': formData.password
         })
         console.log(response);
-        toast.update(id, { render: "Welcome", type: "success", isLoading: false });
+        dispatch(setToken(JSON.stringify(response.data.token)));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        toast.update(id, { render: "Welcome", type: "success", isLoading: false, autoClose: 5000 });
     } catch(err){
       console.log(err);
-      toast.update(id, { render: `${err?.response?.data?.message}`, type: "error", isLoading: false, autoClose: 5000})
+      toast.update(id, { render: `${err?.response?.data?.message}`, type: "error", isLoading: false, autoClose: 5000 })
     }
   }
 

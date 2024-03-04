@@ -1,8 +1,24 @@
 const bcrypt = require('bcrypt');
 const OTP = require('../models/otp.js');
 const user = require('../models/user.js');
+const crypto = require('crypto')
 const otpGenerator = require('otp-generator');
 const jwt = require('jsonwebtoken');
+
+function generateKeyPair() {
+    return crypto.generateKeyPairSync('rsa', {
+        modulusLength: 2048,
+        publicKeyEncoding: {
+            type: 'spki',
+            format: 'pem'
+        },
+        privateKeyEncoding: {
+            type: 'pkcs8',
+            format: 'pem'
+        }
+    });
+}
+
 exports.signup = async(req, res)=>{
     try{
         const {
@@ -50,10 +66,15 @@ exports.signup = async(req, res)=>{
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
+        const { publicKey, privateKey } = generateKeyPair();
+        const formattedPublicKey = publicKey.replace(/-{5}\s*BEGIN PUBLIC KEY\s*-{5}/, '').replace(/-{5}\s*END PUBLIC KEY\s*-{5}/, '').trim();
+        const formattedPrivateKey = privateKey.replace(/-{5}\s*BEGIN PRIVATE KEY\s*-{5}/, '').replace(/-{5}\s*END PRIVATE KEY\s*-{5}/, '').trim();
         await user.create({
                                             username,
                                             email,
                                             password : hashedPassword,
+                                            public_key: formattedPublicKey,
+                                            private_key: formattedPrivateKey,
                                             accountType,
                                             image: `https://api.dicebear.com/5.x/initials/svg?seed=${username}`,
                                         });

@@ -19,6 +19,14 @@ const userSchema = new mongoose.Schema({
         enum: ['Validator', 'Creator'],
         required: true
     },
+    public_key:{
+        type: String,
+        required: true
+    },
+    private_key: {
+        type: String,
+        required: true
+    },
     image: {
         type: String,
         required: true,

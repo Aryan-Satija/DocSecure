@@ -4,10 +4,12 @@ import OtpInput from 'react-otp-input';
 import { apiConnector } from '../services/apiConnector';
 import { AUTH_APIS } from '../services/auth_apis';
 import { toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom';
 
 export const Signup = () => {
   const [mode, setMode] = useState(0);
   const [otpGenerated, setOtpGenerated] = useState(false);
+  const navigate = useNavigate();
   const changeModeHandler = ()=>{
     setFormData(prev => {
       return {
@@ -27,6 +29,19 @@ export const Signup = () => {
 
   const submitHandler = async(event)=>{
     event.preventDefault();
+    if(formData.username === "" || formData.email === "" || formData.password === ""){
+      toast.error('all fields are required!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+      });
+      return;
+    }
     const id = toast.loading("Please wait...")
     try{
         await apiConnector("POST", AUTH_APIS.sendotp_api, {
@@ -52,7 +67,8 @@ export const Signup = () => {
           accountType: formData.accountType,
           input_otp: otp
         })
-        toast.update(id, { render: "Otp sent successfully", type: "success", isLoading: false, autoClose: 5000 });
+        toast.update(id, { render: "task successfull", type: "success", isLoading: false, autoClose: 5000 });
+        navigate('/login');    
     } catch(err){
       console.log(err);
       toast.update(id, { render: `${err?.response?.data?.message}`, type: "error", isLoading: false, autoClose: 5000})
@@ -112,15 +128,15 @@ export const Signup = () => {
           </div>
           <div className='flex flex-col gap-2 text-white/60'>
             <label htmlFor="username">Username:</label>
-            <input type={'text'} id="username" name="username" className='bg-white/10 p-2 rounded-sm border-2 border-white/10 outline-none focus:border-white/40' onChange={changeHandler}/>
+            <input type={'text'} id="username" name="username" className='bg-white/10 p-2 rounded-sm border-2 border-white/10 outline-none focus:border-white/40' onChange={changeHandler} required={true}/>
           </div>
           <div className='flex flex-col gap-2 text-white/60'>
             <label htmlFor="email">Email:</label>
-            <input type={'email'} id="email" name="email" className='bg-white/10 p-2 rounded-sm border-2 border-white/10 outline-none focus:border-white/40' onChange={changeHandler}/>
+            <input type={'email'} id="email" name="email" className='bg-white/10 p-2 rounded-sm border-2 border-white/10 outline-none focus:border-white/40' onChange={changeHandler} required={true}/>
           </div>
           <div className='flex flex-col gap-2 text-white/60'>
             <label htmlFor="password">Password:</label>
-            <input id="password" name="password" className='bg-white/10 p-2 rounded-sm border-2 border-white/10 outline-none focus:border-white/40' type={'password'} onChange={changeHandler}/>
+            <input id="password" name="password" className='bg-white/10 p-2 rounded-sm border-2 border-white/10 outline-none focus:border-white/40' type={'password'} onChange={changeHandler} required={true}/>
           </div>
           <div>
             <button onClick={(event)=>{submitHandler(event)}} className="w-full text-center bg-sky-800 text-richblack-900 cursor-pointer rounded-[8px] px-[24px] py-[12px] duration-200 hover:scale-95">SIGN UP</button>

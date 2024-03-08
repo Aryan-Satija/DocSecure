@@ -13,7 +13,7 @@ const createContract = async()=>{
 
 export const MyProvider = ({children})=>{
     const [currentAccount, setCurrentAccount] = useState('');
-
+    
     const connectToWallet = async()=>{
         try{
             if(!ethereum){
@@ -112,6 +112,7 @@ export const MyProvider = ({children})=>{
         }
     }
     return (<myContext.Provider value={{
+        currentAccount,
         connectToWallet,
         requestToConnectWallet,
         addPdfHash

@@ -3,9 +3,11 @@ import document_shield from '../assets/shield_document.png';
 import { BsUpload } from "react-icons/bs";
 import {apiConnector} from '../services/apiConnector';
 import { PDF_APIS } from '../services/pdf_apis';
+
 export const Create = () => {
   const fileInputRef = useRef(null);
   const [pdf, setPdf] = useState(null);
+
   const submitHandler = async(event)=>{
       event.preventDefault();
       const formData = new FormData();
@@ -21,6 +23,7 @@ export const Create = () => {
                                           )
       console.log(response);
   }
+
   return (
     <div className='px-4 py-24 h-screen'>
       <div className='text-4xl text-gray-800/80 mb-8'>Secure Any Document....</div>

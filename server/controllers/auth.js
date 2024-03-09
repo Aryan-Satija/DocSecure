@@ -4,6 +4,8 @@ const user = require('../models/user.js');
 const crypto = require('crypto')
 const otpGenerator = require('otp-generator');
 const jwt = require('jsonwebtoken');
+const util = require('util');
+const promisify = util.promisify;
 
 function generateKeyPair() {
     return crypto.generateKeyPairSync('rsa', {
@@ -18,6 +20,43 @@ function generateKeyPair() {
         }
     });
 }
+
+exports.protect = async(req, res, next)=>{
+    try{
+        const token = req.cookies.token || req.body.token || req.header('Authorisation')?.replace('Bearer ', '')
+
+        if(!token){
+            return res.status(401).json({
+                success: false,
+                message: 'Token is missing'
+            })
+        }
+
+        try{
+            const decode = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+            req.user = decode;
+        }
+        catch(err) {
+            return res.status(401).json({
+                success:false,
+                token: token,
+                error: err.message,
+                message:'token is invalid',
+            });
+        }
+
+        next();
+    } catch(err){
+        console.log(err);
+        return res.status(401).json({
+            success: false,
+            token,
+            error: err.message,
+            message: 'something went wrong'
+        })
+    }
+}
+
 
 exports.signup = async(req, res)=>{
     try{

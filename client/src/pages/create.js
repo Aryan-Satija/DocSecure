@@ -21,7 +21,7 @@ export const Create = () => {
                                             formData,
                                             {
                                                 "Content-Type": "multipart/form-data",
-                                                Authorisation: `Bearer ${token}`
+                                                'Authorization': `Bearer ${token}`
                                             }
                                           )
       // console.log(response);
@@ -50,10 +50,6 @@ export const Create = () => {
                   }
                 } accept='.pdf' className='hidden'/>
                 <label htmlFor='file' ref={fileInputRef} className={'border py-2 px-4 rounded-md cursor-pointer flex items-center justify-between'} >Upload The Document <BsUpload/></label>
-              </div>
-              <div className='flex flex-col items-start mt-2 text-black/60'>
-                  <label htmlFor='password'>Password:</label>
-                  <input id='password' name='password' className='bg-black/10 p-2 w-full rounded-sm border-2 border-black/10 outline-none focus:border-white/40' type={'password'}/>
               </div>
               <div>
                 <button className='border py-2 px-4 rounded-md' onClick={submitHandler}>Confirm</button>

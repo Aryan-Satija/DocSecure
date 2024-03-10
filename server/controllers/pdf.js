@@ -1,5 +1,5 @@
 const pdfParse = require('pdf-parse');
-
+const user = require('../models/user.js');
 const crypto = require('crypto');
 
 function calculateHash(data) {
@@ -11,6 +11,7 @@ function calculateHash(data) {
 
 exports.pdfEncrypt = async(req, res)=>{
     try{
+
         if((!req.files) || (!req.files.pdfDocument)){
             return res.staus(400).json({
                 success: false,
@@ -19,13 +20,16 @@ exports.pdfEncrypt = async(req, res)=>{
         }
 
         const {pdfDocument} = req.files;
+        const {email} = req.user;
+        const user_doc = await user.findOne({email});
 
         pdfParse(pdfDocument)
         .then((result)=>{
-            const hash = calculateHash(result.text)
+            const hash = calculateHash(result.text + user_doc.private_key)
             return res.status(200).json({
                 success: true,
-                data: hash
+                hash: hash,
+                public_key: user_doc.public_key
             })
         })
 

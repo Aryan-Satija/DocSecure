@@ -23,8 +23,7 @@ function generateKeyPair() {
 
 exports.protect = async(req, res, next)=>{
     try{
-        const token = req.cookies.token || req.body.token || req.header('Authorisation')?.replace('Bearer ', '')
-
+        const token = req.cookies?.token || req.body?.token || req.header('Authorisation')?.replace('Bearer ', '')
         if(!token){
             return res.status(401).json({
                 success: false,

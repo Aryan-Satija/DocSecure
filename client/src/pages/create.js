@@ -3,10 +3,13 @@ import document_shield from '../assets/shield_document.png';
 import { BsUpload } from "react-icons/bs";
 import {apiConnector} from '../services/apiConnector';
 import { PDF_APIS } from '../services/pdf_apis';
-
+import {useSelector} from 'react-redux';
+import { GetGlobalProps } from '../context';
 export const Create = () => {
   const fileInputRef = useRef(null);
   const [pdf, setPdf] = useState(null);
+  const {addPdfHash} = GetGlobalProps();
+  const {token} = useSelector(state => state.auth)
 
   const submitHandler = async(event)=>{
       event.preventDefault();
@@ -18,10 +21,12 @@ export const Create = () => {
                                             formData,
                                             {
                                                 "Content-Type": "multipart/form-data",
-                                                // Authorisation: `Bearer ${token}`
+                                                Authorisation: `Bearer ${token}`
                                             }
                                           )
-      console.log(response);
+      // console.log(response);
+      const {hash, public_key} = response.data; 
+      await addPdfHash(hash, public_key)
   }
 
   return (

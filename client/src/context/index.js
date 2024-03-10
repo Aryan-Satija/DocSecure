@@ -103,7 +103,8 @@ export const MyProvider = ({children})=>{
                 return;
             }
             account = account[0];
-            
+            console.log('pdfHash = ', pdfHash);
+            console.log('publicKey = ', publicKey);
             const txHash = await contract.secureDocument(pdfHash, publicKey);
             await txHash.wait();
             toast.update(idx, {render: `Task Successfull`, type: 'success', isLoading: false, autoClose: 5000});

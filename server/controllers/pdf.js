@@ -51,8 +51,12 @@ exports.userPdfEncrypt = async (req, res) => {
         const { pdfDocument } = req.files;
         const { public_key } = req.body;
 
-        const user_doc = await user.findOne({ public_key });
+        filtered_public_key = public_key.replace('public_key', '');
 
+        const normalized_public_key = filtered_public_key.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+        
+        const user_doc = await user.findOne({ public_key : normalized_public_key });
+        
         if(!user_doc){
             return res.status(400).json({
                 success: false,
@@ -66,7 +70,6 @@ exports.userPdfEncrypt = async (req, res) => {
                 return res.status(200).json({
                     success: true,
                     hash: hash,
-                    public_key: user_doc.public_key
                 });
             });
     } catch (err) {

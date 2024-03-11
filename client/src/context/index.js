@@ -111,11 +111,40 @@ export const MyProvider = ({children})=>{
         } catch(err){
             toast.update(idx, {render: `${err.message}`, type: 'error', isLoading: false, autoClose: 5000})
         }
+
+    }
+
+    const validateDoc = async(docHash, publicKey)=>{
+        try{
+            if(!ethereum){
+                toast('Please Install Metamask!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                return;
+            }
+            console.log(docHash);
+            console.log(publicKey);
+            const contract = await createContract();
+            const isValid = (await contract.validateDocument(docHash, publicKey)).toString()
+            console.log(isValid)
+
+            // return isValid;
+        } catch(err){
+            console.log(err);
+        }
     }
     return (<myContext.Provider value={{
         currentAccount,
         connectToWallet,
         requestToConnectWallet,
+        validateDoc,
         addPdfHash
     }}>
     {

@@ -30,8 +30,8 @@ export const Create = () => {
   }
 
   return (
-    <div className='px-4 py-24 h-screen'>
-      <div className='text-4xl text-gray-800/80 mb-8'>Secure Any Document....</div>
+    <div className='px-4 py-24 h-screen flex flex-col items-center justify-center'>
+      <div className='text-4xl text-gray-800/80 mb-8 mt-16'>Secure Any Document....</div>
       <div className='flex flex-col lg:flex-row justify-around'>
         <form className='py-8 px-4'>
             <div className='flex flex-col gap-2 min-w-[420px]'>

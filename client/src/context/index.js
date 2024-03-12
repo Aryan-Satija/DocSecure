@@ -81,7 +81,7 @@ export const MyProvider = ({children})=>{
         }
 
 
-        const idx = toast.loading('Loading.....please wait')
+        const idx = toast.loading('Loading..please wait')
 
         try{
             const contract = await createContract();
@@ -132,10 +132,9 @@ export const MyProvider = ({children})=>{
             console.log(docHash);
             console.log(publicKey);
             const contract = await createContract();
-            const isValid = (await contract.validateDocument(docHash, publicKey)).toString()
-            console.log(isValid)
-
-            // return isValid;
+            const verdict = (await contract.validateDocument(docHash, publicKey)).toString()
+            console.log(verdict);
+            return verdict;
         } catch(err){
             console.log(err);
         }

@@ -3,7 +3,7 @@
 pragma solidity ^0.8.0;
 
 contract documentVerify{
-    uint256 docCnt;
+    uint256 public docCnt;
     
     event doc_entry(address from, string doc_hash, string public_key);
 
@@ -23,17 +23,17 @@ contract documentVerify{
         emit doc_entry(msg.sender, doc_hash, public_key);
     }
 
-    function validateDocument(string memory doc_hash, string memory public_key) public view returns(bool){
+    function validateDocument(string memory doc_hash, string memory public_key) public view returns(string memory){
         for (uint i = 0; i < docCnt; i++){
             if(
                 (compareStrings(docs[i].doc_hash, doc_hash)) 
                 &&
                 (compareStrings(docs[i].public_key, public_key))
             ){
-                return true;
+                return "Original";
             }
         }
-        return false;
+        return "Fake";
     }
 
     function compareStrings(string memory a, string memory b) internal pure returns(bool){

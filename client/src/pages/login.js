@@ -50,13 +50,13 @@ export const Login = () => {
         <p className='text-slate-950/80'>Welcome to DocSecure: Verify Your Documents with Confidence!</p>
         <div className='flex flex-col gap-2 text-slate-700/80'>
           <label htmlFor='email'>Email:</label>
-          <input id='email' name='email' type={'email'} className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' onChange={(event)=>{
+          <input id='email' name='email' type={'email'} autoComplete={'off'} className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' onChange={(event)=>{
               changeHandler(event);
           }}/>
         </div>
         <div className='flex flex-col gap-2 text-slate-950/80'>
           <label htmlFor='password'>Password:</label>
-          <input id='password' name='password' className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' type={'password'} onChange={(event)=>{
+          <input id='password' name='password' autoComplete={'off'} className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' type={'password'} onChange={(event)=>{
               changeHandler(event);
           }}/>
         </div>

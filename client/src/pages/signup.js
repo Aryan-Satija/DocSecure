@@ -128,11 +128,11 @@ export const Signup = () => {
           </div>
           <div className='flex flex-col gap-2 text-slate-700/80'>
             <label htmlFor="username">Username:</label>
-            <input type={'text'} id="username" name="username" className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' onChange={changeHandler} required={true}/>
+            <input type={'text'} autoComplete={'off'} id="username" name="username" className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' onChange={changeHandler} required={true}/>
           </div>
           <div className='flex flex-col gap-2 text-slate-700/80'>
             <label htmlFor="email">Email:</label>
-            <input type={'email'} id="email" name="email" className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' onChange={changeHandler} required={true}/>
+            <input type={'email'} id="email" autoComplete={'off'} name="email" className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' onChange={changeHandler} required={true}/>
           </div>
           <div className='flex flex-col gap-2 text-slate-700/80'>
             <label htmlFor="password">Password:</label>

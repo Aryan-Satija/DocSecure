@@ -3,6 +3,7 @@ import { MdVerifiedUser, MdDarkMode } from "react-icons/md";
 import {useNavigate, Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { GetGlobalProps } from '../context';
+import { setToken } from '../slices/authSlice';
 export const Navbar = () => {
     const navigate = useNavigate();
     const token = useSelector(state => state.auth.token)
@@ -44,6 +45,13 @@ export const Navbar = () => {
                 }
                 {
                     token && <div className='cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500' onClick={connectToWallet}>Connect To Wallet</div>
+                }
+                {
+                    token && <div className='cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500' onClick={()=>{
+                        setToken('');
+                        localStorage.clear();
+                        navigate('/login');
+                    }}>Log Out</div>
                 }
             </div>
         </div>

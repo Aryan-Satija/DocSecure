@@ -5,4 +5,5 @@ import { Validate } from './validate.js';
 import { Create } from './create.js';
 import { Home } from './home.js';
 import { ContactUs } from './contactUs.js';
-export {Login, Signup, Dashboard, Validate, Create, Home, ContactUs};
+import { Profile } from './profile.js';
+export {Login, Signup, Profile, Dashboard, Validate, Create, Home, ContactUs};

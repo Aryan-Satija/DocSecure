@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Spline from '@splinetool/react-spline';
 import { AUTH_APIS } from '../services/auth_apis.js';
 import {apiConnector} from '../services/apiConnector.js';
 import { toast } from 'react-toastify';

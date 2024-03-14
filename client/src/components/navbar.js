@@ -15,7 +15,7 @@ export const Navbar = () => {
             </div>
             <div className='flex gap-4 w-[60%]'>
                 {
-                    token && <Link to="" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Profile</Link>
+                    token && <Link to="/profile" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Profile</Link>
                 }
                 {
                     token && <Link to="/create" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Create</Link>

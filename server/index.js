@@ -25,7 +25,7 @@ app.use(fileUpload());
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/pdf", pdfRoutes);
-app.use("/api/vi/profile", profileRoutes);
+app.use("/api/v1/profile", profileRoutes);
 // a route handler for the root URL ('/')
 app.get("/", (req, res)=>{
     return res.json({

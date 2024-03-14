@@ -36,6 +36,7 @@ exports.protect = async(req, res, next)=>{
             req.user = decode;
         }
         catch(err) {
+            console.log(err);
             return res.status(401).json({
                 success:false,
                 token: token,

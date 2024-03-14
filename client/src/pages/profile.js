@@ -4,14 +4,19 @@ import { PROFILE_APIS } from '../services/profile_apis';
 import { UseSelector, useSelector } from 'react-redux';
 export const Profile = () => {
   const [profile, setProfile] = useState(null);
-  const token = useSelector(state => state.auth);
+  const {token} = useSelector(state => state.auth);
+  console.log(token);
   useEffect(()=>{
-    const response = apiConnector('POST', PROFILE_APIS.fetch_my_profile_api, null, {
-        'Authorization': `Bearer ${token}`
-    });
+    (async()=>{
+      const response = await apiConnector('POST', PROFILE_APIS.fetch_my_profile_api, null, {
+          'Authorization': `Bearer ${token}`
+      });
+      setProfile(response.data.data);
+    })()
+  }, [])
+  
+  console.log(profile);
 
-    console.log(response);
-  })
   return (
     <div>
         <div></div>

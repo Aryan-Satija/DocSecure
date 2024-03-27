@@ -32,6 +32,7 @@ export const Validate = () => {
                                                 'Authorization': `Bearer ${token}`
                                             }
                                           )
+      console.log(response);
       const {hash} = response.data;
       const verdict = await validateDoc(hash, public_key)
       setVerd(verdict.toLowerCase());

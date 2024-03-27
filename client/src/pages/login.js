@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { AUTH_APIS } from '../services/auth_apis.js';
 import {apiConnector} from '../services/apiConnector.js';
 import { toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux'; 
 import { setToken } from '../slices/authSlice.js';
 import document from '../assets/shield_document.png';
@@ -9,6 +10,7 @@ export const Login = () => {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: '',
@@ -23,10 +25,10 @@ export const Login = () => {
           'email': formData.email,
           'password': formData.password
         })
-        console.log(response);
-        dispatch(setToken(JSON.stringify(response.data.token)));
+        dispatch(setToken(response.data.token));
         localStorage.setItem("token", JSON.stringify(response.data.token));
         toast.update(id, { render: "Welcome", type: "success", isLoading: false, autoClose: 5000 });
+        navigate('/profile')
     } catch(err){
       console.log(err);
       toast.update(id, { render: `${err?.response?.data?.message}`, type: "error", isLoading: false, autoClose: 5000 })

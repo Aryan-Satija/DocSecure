@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdVerifiedUser, MdDarkMode } from "react-icons/md";
+import { MdVerifiedUser } from "react-icons/md";
 import {useNavigate, Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { GetGlobalProps } from '../context';
@@ -7,7 +7,7 @@ import { setToken } from '../slices/authSlice';
 export const Navbar = () => {
     const navigate = useNavigate();
     const token = useSelector(state => state.auth.token)
-    const {connectToWallet, currentAccount} = GetGlobalProps();
+    const {connectToWallet} = GetGlobalProps();
     return (
         <div className='flex items-center justify-between p-4 w-full border fixed bg-white z-20'>
             <div>   
@@ -27,10 +27,10 @@ export const Navbar = () => {
                     token && <Link to="" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Key</Link>
                 }
                 {
-                    !token && <Link to="/home" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Home</Link>
+                    !token && <Link to="/" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Home</Link>
                 }
                 {
-                    !token && <Link to="" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>About</Link>
+                    !token && <Link to="/about" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>About</Link>
                 }
                 {
                     !token && <Link to="/contact" className='flex-1 text-center cursor-pointer border rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Contact Us</Link>

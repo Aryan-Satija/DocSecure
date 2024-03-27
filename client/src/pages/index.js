@@ -6,4 +6,5 @@ import { Create } from './create.js';
 import { Home } from './home.js';
 import { ContactUs } from './contactUs.js';
 import { Profile } from './profile.js';
-export {Login, Signup, Profile, Dashboard, Validate, Create, Home, ContactUs};
+import { About } from './about.js'
+export {Login, About, Signup, Profile, Dashboard, Validate, Create, Home, ContactUs};

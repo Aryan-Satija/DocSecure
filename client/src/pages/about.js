@@ -1,8 +1,8 @@
 import React from 'react'
 import {MdVerifiedUser} from 'react-icons/md'
-import document from '../assets/document.jpg'
+import diagram from '../assets/diagram.png'
+import hero from '../assets/about.png'
 import { Link } from "react-router-dom";
-import banner from '../assets/bannerAbout.mp4'
 import facebook  from "../assets/Images/facebook.svg";
 import google  from "../assets/Images/google.svg";
 import twitter  from "../assets/Images/twitter.svg";
@@ -64,56 +64,50 @@ const FooterLink2 = [
     }
   ];
   
-export const Home = () => {
+export const About = () => {
   return (
     <div className='py-24 px-4'>
         <div className='flex flex-col gap-8'>
-            <div className='text-2xl flex items-center text-slate-950'>Welcome To DocSecure <span className='text-4xl text-green-400'><MdVerifiedUser/></span></div>
-            <div>
-                <video
-                        muted
-                        loop
-                        autoPlay className="w-[100%] mx-auto">
-                        <source src={banner}></source>
-                </video>
+            <div className=''>
+                <img 
+                    src={hero}
+                    className='w-full aspect-video'
+                />
             </div>
-            <div className='flex flex-col md:flex-row-reverse items-center justify-between'>
-                <div className='flex items-center'>
-                    <img className='w-[60rem]' src={document}/>
+            <>
+                <div className='text-sky-400 text-4xl font-bold'>Our Mission</div>
+                <div className='flex flex-col md:flex-row-reverse items-center justify-between'>
+                    <div className='flex items-center'>
+                        <img className='w-[60rem]' src={diagram}/>
+                    </div>
+                    <div className='text-lg text-slate-700 flex flex-col gap-4'>
+                        <div>
+                            DocSecure offers a cutting-edge solution designed to uphold the integrity and authenticity of your PDF documents through secure validation against entries in the blockchain
+                        </div>
+                        <div>
+                            Whether you're a seasoned professional managing sensitive contracts, a diligent student submitting crucial research papers, or anyone in between, DocSecure provides the assurance and peace of mind you need.  
+                        </div>
+                        <div>
+                            At DocSecure, we understand the paramount importance of trust and reliability when it comes to document integrity. Our mission is to empower individuals and organizations alike by offering a seamless platform that simplifies the document validation process while ensuring the highest standards of security.
+                        </div>
+                    </div>
                 </div>
+            </>
+            <>
+                <div className='text-sky-400 text-4xl font-bold'>How It Works?</div>
                 <div className='text-lg text-slate-700 flex flex-col gap-4'>
                     <div>
-                        DocSecure is a powerful tool that allows you to upload and validate PDF documents securely against entries in the blockchain. 
+                        <span className='text-2xl text-green-400 font-bold'>U</span>pload: Simply upload your PDF document to the DocSecure platform.
                     </div>
                     <div>
-                        Whether you're a professional dealing with sensitive contracts, a student submitting important research papers, or anyone in between, our platform ensures the integrity and authenticity of your documents.
+                    <span className='text-2xl text-green-400 font-bold'>V</span>alidation: Our advanced algorithms cross-reference your document against entries in the blockchain to verify its integrity.
                     </div>
                     <div>
-                        DocSecure streamlines the document validation process, saving you time and providing peace of mind. 
-                    </div>
-                    <div>
-                    Get started today by uploading your first document and experience the difference!
+                        <span className='text-2xl text-green-400 font-bold'>C</span>onfirmation: Once validated, you'll receive confirmation that your document is authentic and untampered.
                     </div>
                 </div>
-            </div>
-            <div className='text-slate-700 text-lg grid grid-cols-3'>
-                <div className='border h-[14rem] bg-sky-200 flex flex-col px-16 justify-center'>
-                    Upload PDF documents with ease.
-                </div>
-                <div className='border h-[14rem] bg-sky-400 flex flex-col px-16 justify-center'>
-                    Validate document authenticity using blockchain technology.
-                </div>
-                <div className='border h-[14rem] bg-sky-200 flex flex-col px-16 justify-center'>
-                    User-friendly interface for seamless navigation.
-                </div>
-                <div className='border h-[14rem] bg-sky-400 flex flex-col px-16 justify-center'>
-                    Secure and private document handling.
-                </div>
-                <div className='border h-[14rem] bg-sky-200 flex flex-col px-16 justify-center'>
-                    Fast and reliable performance.
-                </div>
-            </div>
-            <div className="flex flex-col lg:flex-row justify-center gap-[6rem] p-8 ">
+            </>
+            <div className="flex flex-col lg:flex-row justify-center gap-[6rem] p-8 mt-16">
                 <div className="flex flex-wrap gap-16 items-start justify-between ">
                     <div  className="flex flex-col gap-4">
                         <div className="text-slate-950/80 text-2xl font-bold flex gap-2">DocSecure <span className='text-4xl text-green-400'><MdVerifiedUser/></span></div>

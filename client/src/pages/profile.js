@@ -23,12 +23,14 @@ export const Profile = () => {
   console.log(token);
   useEffect(()=>{
     (async()=>{
-      const response = await apiConnector('POST', PROFILE_APIS.fetch_my_profile_api, null, {
-          'Authorization': `Bearer ${token}`
-      });
-      setProfile(response.data.data);
+      if(token){
+          const response = await apiConnector('POST', PROFILE_APIS.fetch_my_profile_api, null, {
+              'Authorization': `Bearer ${token}`
+          });
+          setProfile(response.data.data);
+      }
     })()
-  }, [])
+  }, [token])
   
   console.log(profile);
 

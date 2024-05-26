@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux'; 
 import { setToken } from '../slices/authSlice.js';
-import document from '../assets/shield_document.png';
+import document from '../assets/about.png';
 export const Login = () => {
 
   const dispatch = useDispatch();
@@ -45,27 +45,27 @@ export const Login = () => {
   }
 
   return (
-    <div className='h-screen flex flex-col gap-4 p-4 justify-between items-center md:flex-row w-[100vw] '>
-      <div className='w-full md:h-full p-4 font-special flex flex-col md:justify-center gap-4'>
-        <div className='text-4xl font-bold text-sky-400'>WELCOME BACK</div>
-        <p className='text-slate-950/80'>Welcome to DocSecure: Verify Your Documents with Confidence!</p>
-        <div className='flex flex-col gap-2 text-slate-700/80'>
+    <div className='min-h-screen flex flex-col gap-4 p-4 justify-center md:justify-between items-center md:flex-row w-[100vw] '>
+      <div className='w-full md:h-full p-4 flex flex-col md:justify-center gap-4'>
+        <div className='text-4xl font-bold text-slate-100'>WELCOME BACK</div>
+        <p className='text-slate-400'>Welcome to DocSecure: Verify Your Documents with Confidence!</p>
+        <div className='flex flex-col gap-2 text-slate-200/80'>
           <label htmlFor='email'>Email:</label>
           <input id='email' name='email' type={'email'} autoComplete={'off'} className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' onChange={(event)=>{
               changeHandler(event);
           }}/>
         </div>
-        <div className='flex flex-col gap-2 text-slate-950/80'>
+        <div className='flex flex-col gap-2 text-slate-200/80'>
           <label htmlFor='password'>Password:</label>
           <input id='password' name='password' autoComplete={'off'} className='bg-slate-400/20 p-2 rounded-sm border-2 border-slate-600/60 outline-none focus:border-white/40' type={'password'} onChange={(event)=>{
               changeHandler(event);
           }}/>
         </div>
         <div className="w-full">
-          <button onClick={(event)=>{submitHandler(event)}} className="w-full text-center bg-sky-400 text-richblack-900 cursor-pointer rounded-[8px] px-[24px] py-[12px] duration-200 hover:scale-95">LOGIN</button>
+          <button onClick={(event)=>{submitHandler(event)}} className="text-slate-100 bg-sky-600 p-2 w-full mx-auto rounded-md shadow-md shadow-sky-400 cursor-pointer hover:scale-95 duration-200 text-center">LOGIN</button>
         </div>
       </div>
-      <div className='w-full'>
+      <div className='w-full shadow-xl shadow-slate-700 hidden md:block'>
         <img src={document} className='w-[50rem] h-[35rem] rounded-md shadow-lg'/>
       </div>
     </div>

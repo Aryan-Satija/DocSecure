@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import document_shield from '../assets/shield_document.png';
+import document_shield from '../assets/about.png';
 import { BsUpload } from "react-icons/bs";
 import {apiConnector} from '../services/apiConnector';
 import { PDF_APIS } from '../services/pdf_apis';
@@ -30,13 +30,13 @@ export const Create = () => {
   }
 
   return (
-    <div className='px-4 py-24 h-screen flex flex-col items-center justify-center'>
-      <div className='text-4xl text-gray-800/80 mb-8 mt-16'>Secure Any Document....</div>
-      <div className='flex flex-col lg:flex-row justify-around'>
+    <div className='px-4 h-screen flex flex-col items-center justify-center'>
+      <div className='text-4xl text-gray-100 mb-8 mt-16'>Secure Any Document....</div>
+      <div className='flex flex-col lg:flex-row justify-center items-center lg:justify-around'>
         <form className='py-8 px-4'>
-            <div className='flex flex-col gap-2 min-w-[420px]'>
+            <div className='flex flex-col gap-2 min-w-[420px] text-slate-200'>
               <label>Public Key:</label>
-              <input type='text' id='public_id' value={'0x045yahe9q9e73901js0001929sjznua'} className='border rounded-md p-2 w-full focus:outline-none pointer-events-none' readOnly/>
+              <input type='text' id='public_id' value={'0x045yahe9q9e73901js0001929sjznua'} className='rounded-md p-2 w-full focus:outline-none pointer-events-none bg-black' readOnly/>
               <div className='mt-2'>
                 <input type='file' id='file' name='file' onChange={
                   (event)=>{
@@ -49,10 +49,10 @@ export const Create = () => {
                     }
                   }
                 } accept='.pdf' className='hidden'/>
-                <label htmlFor='file' ref={fileInputRef} className={'border py-2 px-4 rounded-md cursor-pointer flex items-center justify-between'} >Upload The Document <BsUpload/></label>
+                <label htmlFor='file' ref={fileInputRef} className={'text-slate-100 bg-sky-600 shadow-md shadow-sky-400 py-2 px-4 hover:scale-95 duration-200 rounded-md cursor-pointer flex items-center justify-between'} >Upload The Document <BsUpload/></label>
               </div>
               <div>
-                <button className='border py-2 px-4 rounded-md' onClick={submitHandler}>Confirm</button>
+                <button className='text-slate-100 bg-sky-600 p-2 w-[8rem] mx-auto rounded-md shadow-md shadow-sky-400 cursor-pointer hover:scale-95 duration-200 text-center' onClick={submitHandler}>Confirm</button>
               </div>
             </div>
         </form>

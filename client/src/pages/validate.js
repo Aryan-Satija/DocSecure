@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import document_shield from '../assets/shield_document.png';
+import document_shield from '../assets/about.png';
 import original from '../assets/original.png';
 import fake from '../assets/Fake.png';
 import { BsUpload } from "react-icons/bs";
@@ -45,18 +45,18 @@ export const Validate = () => {
       }
   }
   return (
-    <div className='px-4 py-24 h-screen flex flex-col items-center justify-center'>
-      <div className='text-4xl text-gray-800/80 mb-8 mt-16'>Validate Any Document....</div>
-      <div className='flex flex-col lg:flex-row-reverse justify-around'>
+    <div className='px-4 min-h-screen flex flex-col justify-center items-center'>
+      <div className='text-4xl text-slate-100 mb-8 mt-16'>Validate Any Document....</div>
+      <div className='flex flex-col lg:flex-row-reverse justify-around lg:justify-center items-center'>
         <form className='py-8 px-4'>
             <div className='flex flex-col gap-2 min-w-[420px]'>
-              <div>Enter Public Key:</div>
+              <div className='text-slate-200'>Enter Public Key:</div>
               <textarea type='text' id='public_id' rows={14} onChange={(event)=>{
                     const inputValue = event.target.value;
                     // Normalize line endings to Unix format
                     const normalizedValue = inputValue.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
                     setPublic_key(normalizedValue);
-              }} className='border rounded-md p-2 w-full focus:outline-none resize-none' spellCheck={false}/>
+              }} className='rounded-md p-2 text-slate-200 w-full bg-black focus:outline-none resize-none' spellCheck={false}/>
               <div className=''>
                 <input type='file' id='file' name='file' onChange={
                   (event)=>{
@@ -68,15 +68,15 @@ export const Validate = () => {
                     }
                   }
                 } accept='.pdf' className='hidden'/>
-                <label htmlFor='file' ref={fileInputRef} className={'border py-2 px-4 rounded-md cursor-pointer flex items-center justify-between'} >Upload The Document <BsUpload/></label>
+                <label htmlFor='file' ref={fileInputRef} className={'text-slate-100 bg-sky-600 shadow-md shadow-sky-400 py-2 px-4 hover:scale-95 duration-200 rounded-md cursor-pointer flex items-center justify-between'}>Upload The Document <BsUpload/></label>
               </div>
               <div>
-                <button className='border py-2 px-4 rounded-md' onClick={submitHandler}>Confirm</button>
+                <button className='text-slate-100 bg-sky-600 p-2 w-[8rem] mx-auto rounded-md shadow-md shadow-sky-400 cursor-pointer hover:scale-95 duration-200 text-center' onClick={submitHandler}>Confirm</button>
               </div>
             </div>
         </form>
         <div>
-            <img src={document_shield} className='w-[50rem] h-[35rem] rounded-md shadow-lg'/>
+            <img src={document_shield} className='w-[50rem] h-[35rem] rounded-md shadow-lg hidden lg:block'/>
         </div>
       </div>
       {
@@ -84,7 +84,7 @@ export const Validate = () => {
         <div className='absolute mt-20 bg-slate-400/40 rounded-md backdrop-blur-md p-4' onClick={()=>{
           setOpenModal(false);
         }}>
-          <div className='text-4xl text-slate-900 font-bold'>Verdict :</div>
+          <div className='text-4xl text-slate-400 font-bold'>Verdict :</div>
           <div>
               <img src={original} width={500} />
               <div className='w-[500px] font-bold text-green-900'>

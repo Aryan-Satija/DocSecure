@@ -1,180 +1,114 @@
 import React from 'react'
-import {MdVerifiedUser} from 'react-icons/md'
-import document from '../assets/document.jpg'
-import { Link } from "react-router-dom";
-import banner from '../assets/bannerAbout.mp4'
-import facebook  from "../assets/Images/facebook.svg";
-import google  from "../assets/Images/google.svg";
-import twitter  from "../assets/Images/twitter.svg";
-import youtube  from "../assets/Images/youtube.svg";
 
-const FooterLink2 = [
+import Footer from '../components/footer';
+import hero from '../assets/hero.png'
+import { useNavigate } from 'react-router-dom';
+
+const companies = [
     {
-      title: "Subjects",
-      links: [
-        { title: "Al", link: "/al" },
-        { title: "Cloud Computing", link: "/cloud-computing" },
-        { title: "Code Foundations", link: "/code-foundations" },
-        { title: "Computer Science", link: "/computer-science" },
-        { title: "Cybersecurity", link: "/cybersecurity" },
-        { title: "Data Analytics", link: "/data-analytics" },
-        { title: "Data Science", link: "/data-science" },
-        { title: "Data Visualization", link: "/data-visualization" },
-        { title: "Developer Tools", link: "/developer-tools" },
-        { title: "DevOps", link: "/devops" },
-        { title: "Game Development", link: "/game-development" },
-        { title: "IT", link: "/it" },
-        { title: "Machine Learning", link: "/machine-learning" },
-        { title: "Math", link: "/math" },
-        { title: "Mobile Development", link: "/mobile-development" },
-        { title: "Web Design", link: "/web-design" },
-        { title: "Web Development", link: "/web-development" },
-      ],
+        id: 1,
+        name: 'Google',
     },
     {
-      title: "Languages",
-      links: [
-        { title: "Bash", link: "/bash" },
-        { title: "C++", link: "/c++" },
-        { title: "C#", link: "/csharp" },
-        { title: "Go", link: "/go" },
-        { title: "HTML & CSS", link: "/html-css" },
-        { title: "Java", link: "/java" },
-        { title: "JavaScript", link: "/javascript" },
-        { title: "Kotlin", link: "/kotlin" },
-        { title: "PHP", link: "/php" },
-        { title: "Python", link: "/python" },
-        { title: "R", link: "/r" },
-        { title: "Ruby", link: "/ruby" },
-        { title: "SQL", link: "/sql" },
-        { title: "Swift", link: "/swift" },
-      ],
+        id: 2,
+        name: 'Facebook',
     },
     {
-      title: "Career building",
-      links: [
-          {title: "Career paths", link: "/career-paths"},
-          {title: "Career services", link: "/career-services"},
-          {title: "Interview prep", link: "/interview-prep"},
-          {title: "Professional certification", link: "/professional-certification"},
-          {title: "-", link: "/hi"},
-          {title: "Full Catalog", link: "/full-catalog"},
-          {title: "Beta Content", link: "/beta-content"}
-      ]
-    }
-  ];
-  
+        id: 3,
+        name: 'Shopify'
+    },
+    {
+        id: 4,
+        name: 'Amazon',
+    },
+    {
+        id: 5,
+        name: 'Scale',
+    },
+    {
+        id: 6,
+        name: 'Webflow',
+    },
+    {
+        id: 7,
+        name: 'Threads',
+    },
+    {
+        id: 8,
+        name: 'Twitter',
+    },
+    {
+        id: 9,
+        name: 'Neon'
+    },
+]
+
 export const Home = () => {
-  return (
-    <div className='py-24 px-4'>
-        <div className='flex flex-col gap-8'>
-            <div className='text-2xl flex items-center text-slate-950'>Welcome To DocSecure <span className='text-4xl text-green-400'><MdVerifiedUser/></span></div>
+    const navigate = useNavigate();
+    return (
+    <div className='py-24 px-4 overflow-x-hidden'>
+        <div className='w-[60%] min-w-[320px] mx-auto flex flex-col gap-8'>
+            <h1 className='text-4xl font-bold text-slate-200 text-center'>Welcome to DocSecure</h1>
+            <div className='text-md text-slate-400 text-center'>
+                DocSecure is a powerful tool that allows you to upload and validate PDF documents securely against entries in the blockchain. 
+            </div>
+            <button onClick={()=>{
+                navigate('/signup')
+            }} className='text-slate-100 bg-sky-600 p-2 w-[8rem] mx-auto rounded-md shadow-md shadow-sky-400 cursor-pointer hover:scale-95 duration-200 text-center'>
+                Visit Now
+            </button>
+            <div className='bg-black p-16 lg:p-4 flex flex-col-reverse lg:flex-row items-center gap-4 rounded-md '>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                    <h2 className='text-slate-200 text-4xl font-semibold text-center'>Transparency & authenticity</h2>
+                    <p className='text-sm text-slate-400 text-center'>Whether you're a professional dealing with sensitive contracts, a student submitting important research papers, or anyone in between, our platform ensures the integrity and authenticity of your documents</p>
+                </div>
+                <>
+                    <img src={hero} width={300} className='rounded-md'/>
+                </>
+            </div>
+            <div className='bg-black p-16 lg:p-4 flex flex-col lg:flex-row items-center gap-4 rounded-md '>
+                <>
+                    <img src={hero} width={300} className='rounded-md'/>
+                </>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                    <h2 className='text-slate-200 text-4xl font-semibold text-center'>Peace of mind</h2>
+                    <p className='text-sm text-slate-400 text-center'>DocSecure streamlines the document validation process, saving you time and providing peace of mind.</p>
+                </div>
+            </div>
+            <div className='bg-black p-16 lg:p-4 flex flex-col-reverse lg:flex-row items-center gap-4 rounded-md '>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                    <h2 className='text-slate-200 text-4xl font-semibold text-center'>Trust and Reliability</h2>
+                    <p className='text-sm text-slate-400 text-center'>At DocSecure, we understand the paramount importance of trust and reliability when it comes to document integrity. Our mission is to empower individuals and organizations alike by offering a seamless platform that simplifies the document validation process while ensuring the highest standards of security.</p>
+                </div>
+                <>
+                    <img src={hero} width={300} className='rounded-md'/>
+                </>
+            </div>
+            <div className='bg-black p-16 lg:p-4 flex flex-col lg:flex-row items-center gap-4 rounded-md '>
+                <>
+                    <img src={hero} width={300} className='rounded-md'/>
+                </>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                    <h2 className='text-slate-200 text-4xl font-semibold text-center'>Experience the Difference</h2>
+                    <p className='text-sm text-slate-400 text-center'>Get started today by uploading your first document and experience the difference!</p>
+                </div>
+            </div>
             <div>
-                <video
-                        muted
-                        loop
-                        autoPlay className="w-[100%] mx-auto">
-                        <source src={banner}></source>
-                </video>
-            </div>
-            <div className='flex flex-col md:flex-row-reverse items-center justify-between'>
-                <div className='flex items-center'>
-                    <img className='w-[60rem]' src={document}/>
-                </div>
-                <div className='text-lg text-slate-700 flex flex-col gap-4'>
-                    <div>
-                        DocSecure is a powerful tool that allows you to upload and validate PDF documents securely against entries in the blockchain. 
-                    </div>
-                    <div>
-                        Whether you're a professional dealing with sensitive contracts, a student submitting important research papers, or anyone in between, our platform ensures the integrity and authenticity of your documents.
-                    </div>
-                    <div>
-                        DocSecure streamlines the document validation process, saving you time and providing peace of mind. 
-                    </div>
-                    <div>
-                    Get started today by uploading your first document and experience the difference!
-                    </div>
-                </div>
-            </div>
-            <div className='text-slate-700 text-lg grid grid-cols-3'>
-                <div className='border h-[14rem] bg-sky-200 flex flex-col px-16 justify-center'>
-                    Upload PDF documents with ease.
-                </div>
-                <div className='border h-[14rem] bg-sky-400 flex flex-col px-16 justify-center'>
-                    Validate document authenticity using blockchain technology.
-                </div>
-                <div className='border h-[14rem] bg-sky-200 flex flex-col px-16 justify-center'>
-                    User-friendly interface for seamless navigation.
-                </div>
-                <div className='border h-[14rem] bg-sky-400 flex flex-col px-16 justify-center'>
-                    Secure and private document handling.
-                </div>
-                <div className='border h-[14rem] bg-sky-200 flex flex-col px-16 justify-center'>
-                    Fast and reliable performance.
-                </div>
-            </div>
-            <div className="flex flex-col lg:flex-row justify-center gap-[6rem] p-8 ">
-                <div className="flex flex-wrap gap-16 items-start justify-between ">
-                    <div  className="flex flex-col gap-4">
-                        <div className="text-slate-950/80 text-2xl font-bold flex gap-2">DocSecure <span className='text-4xl text-green-400'><MdVerifiedUser/></span></div>
-                        <div className="text-slate-950/80 font-bold">Company</div>
-                        <Link className="text-slate-800/80">About</Link>
-                        <Link className="text-slate-800/80">Careers</Link>
-                        <Link className="text-slate-800/80">Affliates</Link>
-                        <div className="flex gap-2">
-                            <Link><img src={facebook}></img></Link>
-                            <Link><img src={google}></img></Link>
-                            <Link><img src={twitter}></img></Link>
-                            <Link><img src={youtube}></img></Link>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="text-slate-950/80 font-bold">Resources</div>
-                        <Link className="text-slate-800/80">Article</Link>
-                        <Link className="text-slate-800/80">Blog</Link>
-                        <Link className="text-slate-800/80">Chart Sheet</Link>
-                        <Link className="text-slate-800/80">Code Challenges</Link>
-                        <Link className="text-slate-800/80">Docs</Link>
-                        <Link className="text-slate-800/80">Projects</Link>
-                        <Link className="text-slate-800/80">Videos</Link>
-                        <Link className="text-slate-800/80">Workspaces</Link>
-                        <div className="text-slate-950/80 font-bold">Support</div>
-                        <Link className="text-slate-800/80">Help Center</Link>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="text-slate-950/80 font-bold">Plans</div>
-                        <Link className="text-slate-700/80">Paid memberships</Link>
-                        <Link className="text-slate-700/80">For students</Link>
-                        <Link className="text-slate-700/80">Business solutions</Link>
-                        <div className="text-slate-950/80 font-bold">Community</div>
-                        <Link className="text-slate-700/80">Forums</Link>
-                        <Link className="text-slate-700/80">Chapters</Link>
-                        <Link className="text-slate-700/80">Events</Link>
-                    </div>
-                </div>
-                <div className="flex flex-wrap gap-16 items-start justify-between">
+                <h2 className='text-2xl text-center mt-4 text-slate-400 font-semibold'>Companies Using DocSecure</h2>
+                <div className='flex flex-wrap gap-4 items-center justify-center mt-4 text-slate-100'>
                 {
-                    FooterLink2.map((links, index)=>{  
-                        return(<div key={index} className="flex flex-col gap-8 justify-between">
-                            <div className="text-slate-950/80 font-bold relative cursor-pointer">{
-                                links.title
-                            }
+                    companies.map((company)=>{
+                        return <div key={company.id} className='w-[220px] p-4 rounded-lg bg-black text-2xl  flex flex-col items-center justify-center aspect-video cursor-pointer hover:scale-105 duration-200 shadow-md shadow-slate-800'>
+                            <div className='bg-gradient-to-r from-slate-400 to-slate-200 inline-block text-transparent bg-clip-text'>
+                                {company.name}
                             </div>
-                            <div className="flex flex-col justify-between gap-2">
-                                {
-                                    links.links.map((link)=>{
-                                        return (
-                                            <Link to={link.link} className="text-slate-700/80">{link.title}</Link>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>) 
+                        </div>
                     })
                 }
                 </div>
             </div>
         </div>
+        <Footer/>
     </div>
   )
 }

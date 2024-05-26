@@ -5,7 +5,7 @@ import PrivateRoute from './components/privateRoute';
 function App() {
   return (
     <div>
-      <div>
+      <div className='bg-[#121316]'>
         <Routes>
           <Route exact path="/" element={<Dashboard/>}>
               <Route exact path="/validate" element={<PrivateRoute><Validate/></PrivateRoute>}/>

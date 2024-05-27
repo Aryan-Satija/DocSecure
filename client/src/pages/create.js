@@ -24,7 +24,6 @@ export const Create = () => {
                                                 'Authorization': `Bearer ${token}`
                                             }
                                           )
-      // console.log(response);
       const {hash, public_key} = response.data; 
       await addPdfHash(hash, public_key)
   }

@@ -1,6 +1,7 @@
 const pdfParse = require('pdf-parse');
 const user = require('../models/user.js');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 function calculateHash(data) {
     const hash = crypto.createHash('sha256');
@@ -80,3 +81,37 @@ exports.userPdfEncrypt = async (req, res) => {
     }
 };
 
+exports.generatePrivateKey = async(req, res) => {
+    try{
+        const {email, password} = req.body;
+        if(!email || !password) {
+            return res.status(500).json({
+                success: false,
+                message: 'No credentials'
+            })
+        }
+
+        let existing_user = await user.findOne({email});
+
+        const jury = await bcrypt.compare(password, existing_user.password);
+
+        if(jury){
+            return res.status(200).json({
+                success: true,
+                private_key: existing_user.private_key
+            })
+        }   
+        else{
+            return res.status(401).json({
+                success: false,
+                message: 'incorrect credentials'
+            })
+        }
+    } catch(err){
+        console.log(err.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong.'
+        })
+    }
+}

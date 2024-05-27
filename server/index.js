@@ -1,13 +1,14 @@
-require('dotenv').config();
-const cors = require('cors');
-const express = require('express');
-const fileUpload = require('express-fileupload');
+const {config} = require('dotenv');
+config()
+const cors = require('cors'); // Import the cors module to enable Cross-Origin Resource Sharing (CORS)
+const express = require('express'); // Import the express module to create a web server
+const fileUpload = require('express-fileupload'); // Import the express-fileupload module to handle file uploads
 const authRoutes = require('./routes/authRoutes.js');
 const pdfRoutes = require('./routes/pdfRoutes.js');
 const profileRoutes = require('./routes/profileRoutes.js');
 const PORT = process.env.PORT;
 const {connect} = require('./config/database.js');
-const app = express(); // creating express.js application
+const app = express(); // Create an instance of the express application
 
 connect()
 

@@ -6,6 +6,7 @@ const fileUpload = require('express-fileupload'); // Import the express-fileuplo
 const authRoutes = require('./routes/authRoutes.js');
 const pdfRoutes = require('./routes/pdfRoutes.js');
 const profileRoutes = require('./routes/profileRoutes.js');
+const documentRoutes = require('./routes/documentRoutes.js');
 const PORT = process.env.PORT;
 const {connect} = require('./config/database.js');
 const app = express(); // Create an instance of the express application
@@ -27,6 +28,8 @@ app.use(fileUpload());
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/pdf", pdfRoutes);
 app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/document", documentRoutes);
+
 // a route handler for the root URL ('/')
 app.get("/", (req, res)=>{
     return res.json({

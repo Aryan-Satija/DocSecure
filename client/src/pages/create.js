@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import document_shield from '../assets/about.png';
 import { BsUpload } from "react-icons/bs";
 import {apiConnector} from '../services/apiConnector';
+import { DOCUMENT_APIS } from '../services/document_apis';
 import { PDF_APIS } from '../services/pdf_apis';
 import {useSelector} from 'react-redux';
 import { GetGlobalProps } from '../context';
@@ -25,8 +26,16 @@ export const Create = () => {
                                             }
                                           )
       const {hash, public_key} = response.data; 
-      await addPdfHash(hash, public_key)
-  }
+      const txhash = await addPdfHash(hash, public_key)
+      if(txhash){
+        await apiConnector('POST', DOCUMENT_APIS.create_document_api, { 
+          name: 'Hello World', 
+          txHash: txhash
+        }, {
+          'Authorization': `Bearer ${token}`
+        });
+      }                           
+    }
 
   return (
     <div className='px-4 h-screen flex flex-col items-center justify-center'>

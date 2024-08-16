@@ -104,9 +104,9 @@ export const MyProvider = ({children})=>{
             }
             account = account[0];
             const txHash = await contract.secureDocument(pdfHash, publicKey);
-            console.log(txHash);
             await txHash.wait();
             toast.update(idx, {render: `Task Successfull`, type: 'success', isLoading: false, autoClose: 5000});
+            return txHash.hash;
         } catch(err){
             toast.update(idx, {render: `${err.message}`, type: 'error', isLoading: false, autoClose: 5000})
         }

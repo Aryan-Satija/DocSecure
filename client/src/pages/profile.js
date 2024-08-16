@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Line } from 'react-chartjs-2';
 import {apiConnector} from '../services/apiConnector.js';
 import { PROFILE_APIS } from '../services/profile_apis';
-import { useSelector } from 'react-redux';
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Chart }            from 'react-chartjs-2'
+
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 const data = {
@@ -36,7 +34,7 @@ export const Profile = () => {
 
   return (
     <div className='relative min-h-screen pl-4 pt-24 flex flex-col gap-4 overflow-x-hidden'>
-      
+
     </div>
   )
 }

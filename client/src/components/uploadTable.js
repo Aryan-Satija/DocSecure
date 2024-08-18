@@ -181,7 +181,7 @@ export const UploadTable = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                transition: Bounce,
+                // transition: Bounce,
             });
             const txHash = await addPdfHash(hashes, names, publicKeys);
             setProgress((prev)=>{
@@ -201,7 +201,7 @@ export const UploadTable = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                transition: Bounce,
+                // transition: Bounce,
             });
 
             let size = names.length;
@@ -243,7 +243,7 @@ export const UploadTable = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                transition: Bounce,
+                // transition: Bounce,
             });
         })
     }

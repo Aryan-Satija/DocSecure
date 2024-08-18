@@ -65,7 +65,7 @@ export const MyProvider = ({children})=>{
         }
     }
 
-    const addPdfHash = async(pdfHash, publicKey)=>{
+    const addPdfHash = async(pdfHash, name, publicKey)=>{
         if(!ethereum){
             toast('Please Install Metamask!', {
                 position: "top-right",
@@ -103,7 +103,7 @@ export const MyProvider = ({children})=>{
                 return;
             }
             account = account[0];
-            const txHash = await contract.secureDocument(pdfHash, publicKey);
+            const txHash = await contract.secureDocuments(pdfHash, name, publicKey);
             await txHash.wait();
             toast.update(idx, {render: `Task Successfull`, type: 'success', isLoading: false, autoClose: 5000});
             return txHash.hash;
@@ -128,11 +128,8 @@ export const MyProvider = ({children})=>{
                 });
                 return;
             }
-            console.log(docHash);
-            console.log(publicKey);
             const contract = await createContract();
-            const verdict = (await contract.validateDocument(docHash, publicKey)).toString()
-            console.log(verdict);
+            const verdict = (await contract.validateDocuments(docHash, publicKey)).toString()
             return verdict;
         } catch(err){
             console.log(err);

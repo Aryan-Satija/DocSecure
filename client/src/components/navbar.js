@@ -15,18 +15,6 @@ export const Navbar = () => {
             </div>
             <div className='hidden md:flex text-slate-200 gap-4 w-[60%]'>
                 {
-                    token && <Link to="/profile" className='flex-1 text-center cursor-pointer rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Profile</Link>
-                }
-                {
-                    token && <Link to="/create" className='flex-1 text-center cursor-pointer rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Create</Link>
-                }
-                {
-                    token && <Link to="/validate" className='flex-1 text-center cursor-pointer rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Validate</Link>
-                }
-                {
-                    token && <Link to="" className='flex-1 text-center cursor-pointer rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Key</Link>
-                }
-                {
                     !token && <Link to="/" className='flex-1 text-center cursor-pointer rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Home</Link>
                 }
                 {

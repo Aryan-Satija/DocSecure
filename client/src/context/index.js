@@ -80,9 +80,6 @@ export const MyProvider = ({children})=>{
             return;
         }
 
-
-        const idx = toast.loading('Loading..please wait')
-
         try{
             const contract = await createContract();
             let account = await ethereum.request({
@@ -105,10 +102,19 @@ export const MyProvider = ({children})=>{
             account = account[0];
             const txHash = await contract.secureDocuments(pdfHash, name, publicKey);
             await txHash.wait();
-            toast.update(idx, {render: `Task Successfull`, type: 'success', isLoading: false, autoClose: 5000});
             return txHash.hash;
         } catch(err){
-            toast.update(idx, {render: `${err.message}`, type: 'error', isLoading: false, autoClose: 5000})
+            toast.error(`Something went wrong while uploading to blockchain`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                // transition: Bounce,
+            });
         }
 
     }

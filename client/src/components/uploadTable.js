@@ -39,15 +39,15 @@ export const UploadTable = () => {
     const {addPdfHash} = GetGlobalProps();
 
     const uploadFiles = async()=>{
-        queue.forEach(async(task) => {
+        for (const task of queue){
             let names = [];
             let hashes = [];
-            let publicKeys = []; 
+            let publicKeys = [];
             if(task == 1){
                 let completed = 0;
-                for(let i = 0; i < files1.length; i+=1){
-                    const file = files1[i];
-                    console.log(file);                    
+                let size = files1?.length;
+                for(let i = 0; i < size; i++){
+                    const file = files1[i];                 
                     const formData = new FormData();
                     formData.append("pdfDocument", file);
                     await (async()=>{
@@ -56,7 +56,7 @@ export const UploadTable = () => {
                                 setProgress((prev)=>{
                                     return prev.map((progress, index)=>{
                                         if(index == task - 1){
-                                            return ((progressEvent.progress*100*completed)/files1.length);
+                                            return ((progressEvent.progress*100*completed)/size);
                                         }
                                         return progress;
                                     })
@@ -77,7 +77,8 @@ export const UploadTable = () => {
             }
             else if(task == 2){
                 let completed = 0;
-                for(let i = 0; i < files2.length; i+=1){
+                let size = files2?.length;
+                for(let i = 0; i < size; i+=1){
                     const file = files2[i];
                     console.log(file);                    
                     const formData = new FormData();
@@ -88,7 +89,7 @@ export const UploadTable = () => {
                                 setProgress((prev)=>{
                                     return prev.map((progress, index)=>{
                                         if(index == task - 1){
-                                            return ((progressEvent.progress*100*completed)/files2.length);
+                                            return ((progressEvent.progress*100*completed)/size);
                                         }
                                         return progress;
                                     })
@@ -110,9 +111,9 @@ export const UploadTable = () => {
             }
             else if(task == 3){
                 let completed = 0;
-                for(let i = 0; i < files3.length; i+=1){
-                    const file = files3[i];
-                    console.log(file);                    
+                let size = files3?.length;
+                for(let i = 0; i < size; i+=1){
+                    const file = files3[i];                   
                     const formData = new FormData();
                     formData.append("pdfDocument", file);
                     await (async()=>{
@@ -121,7 +122,7 @@ export const UploadTable = () => {
                                 setProgress((prev)=>{
                                     return prev.map((progress, index)=>{
                                         if(index == task - 1){
-                                            return ((progressEvent.progress*100*completed)/files3.length);
+                                            return ((progressEvent.progress*100*completed)/size);
                                         }
                                         return progress;
                                     })
@@ -142,9 +143,9 @@ export const UploadTable = () => {
             }
             else{
                 let completed = 0;
-                for(let i = 0; i < files4.length; i+=1){
-                    const file = files4[i];
-                    console.log(file);                    
+                let size = files4?.length;
+                for(let i = 0; i < size; i+=1){
+                    const file = files4[i];                 
                     const formData = new FormData();
                     formData.append("pdfDocument", file);
                     await (async()=>{
@@ -153,7 +154,7 @@ export const UploadTable = () => {
                                 setProgress((prev)=>{
                                     return prev.map((progress, index)=>{
                                         if(index == task - 1){
-                                            return ((progressEvent.progress*100*completed)/files4.length);
+                                            return ((progressEvent.progress*100*completed)/size);
                                         }
                                         return progress;
                                     })
@@ -192,48 +193,50 @@ export const UploadTable = () => {
                     return progress;
                 })
             });
-            toast.success(`Task-${task} Uploaded To Blockchain`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                // transition: Bounce,
-            });
-
-            let size = names.length;
-            for (let i  = 0; i < size; i++){
-                const response = await axios.post(DOCUMENT_APIS.create_document_api, {
-                    name: names[i],
-                    txHash
-                }, {
-                    onUploadProgress: (progressEvent)=>{
-                        setProgress((prev)=>{
-                            return prev.map((progress, index)=>{
-                                if(index == task - 1){
-                                    return ((progressEvent.progress*100*i)/size);
-                                }
-                                return progress;
-                            })
-                        });
-                    },  
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
+            if(txHash){
+                toast.success(`Task-${task} Uploaded To Blockchain`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    // transition: Bounce,
+                });
+    
+                let size = names.length;
+                for (let i  = 0; i < size; i++){
+                    const response = await axios.post(DOCUMENT_APIS.create_document_api, {
+                        name: names[i],
+                        txHash
+                    }, {
+                        onUploadProgress: (progressEvent)=>{
+                            setProgress((prev)=>{
+                                return prev.map((progress, index)=>{
+                                    if(index == task - 1){
+                                        return ((progressEvent.progress*100*i)/size);
+                                    }
+                                    return progress;
+                                })
+                            });
+                        },  
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                }
+                setProgress((prev)=>{
+                    return prev.map((progress, index)=>{
+                        if(index == task - 1){
+                            return (100);
+                        }
+                        return progress;
+                    })
+                });
             }
-            setProgress((prev)=>{
-                return prev.map((progress, index)=>{
-                    if(index == task - 1){
-                        return (100);
-                    }
-                    return progress;
-                })
-            });
             toast.success(`Task-${task} Task Completed`, {
                 position: "top-right",
                 autoClose: 5000,
@@ -245,7 +248,12 @@ export const UploadTable = () => {
                 theme: "dark",
                 // transition: Bounce,
             });
-        })
+        }
+        setQueue([]);
+        setFiles1(null);
+        setFiles2(null);
+        setFiles3(null);
+        setFiles4(null);
     }
 
   return (
@@ -289,7 +297,7 @@ export const UploadTable = () => {
                     <Box display='flex' alignItems='center'>
                         <Input
                             type='file'
-                            id='file-upload'
+                            id='file-upload-1'
                             display='none'
                             multiple
                             onChange={(e)=>{
@@ -297,12 +305,12 @@ export const UploadTable = () => {
                             }}
                             accept='.pdf'
                         />
-                        <label htmlFor='file-upload'>
+                        <label htmlFor='file-upload-1'>
                             <Button as='span' colorScheme='green' cursor='pointer'>
                                 Choose File(s)
                             </Button>
                         </label>
-                        <Text ml={3} color='gray.500'>No file chosen</Text>
+                        <Text ml={3} color='gray.500'>{(!files1) ? "No file chosen" : "Files Selected"}</Text>
                     </Box>
                 </Td>
                 <Td>
@@ -312,6 +320,7 @@ export const UploadTable = () => {
                         : 
                         <Button colorScheme='blue'
                             onClick={()=>{
+                                if(!files1) return;
                                 setQueue((prev)=>{
                                     return [...prev, 1];
                                 })
@@ -333,7 +342,7 @@ export const UploadTable = () => {
                         <Box display='flex' alignItems='center'>
                             <Input
                                 type='file'
-                                id='file-upload'
+                                id='file-upload-2'
                                 display='none'
                                 multiple
                                 onChange={(e)=>{
@@ -341,12 +350,12 @@ export const UploadTable = () => {
                                 }}
                                 accept='.pdf'
                             />
-                            <label htmlFor='file-upload'>
+                            <label htmlFor='file-upload-2'>
                                 <Button as='span' colorScheme='green' cursor='pointer'>
                                     Choose File(s)
                                 </Button>
                             </label>
-                            <Text ml={3} color='gray.500'>No file chosen</Text>
+                            <Text ml={3} color='gray.500'>{(!files2) ? "No file chosen" : "Files Selected"}</Text>
                         </Box>
                     </Td>
                     <Td>
@@ -356,6 +365,7 @@ export const UploadTable = () => {
                         : 
                         <Button colorScheme='blue'
                             onClick={()=>{
+                                if(!files2) return;
                                 setQueue((prev)=>{
                                     return [...prev, 2];
                                 })
@@ -378,7 +388,7 @@ export const UploadTable = () => {
                         <Box display='flex' alignItems='center'>
                             <Input
                                 type='file'
-                                id='file-upload'
+                                id='file-upload-3'
                                 display='none'
                                 multiple
                                 onChange={(e)=>{
@@ -386,12 +396,12 @@ export const UploadTable = () => {
                                 }}
                                 accept='.pdf'
                             />
-                            <label htmlFor='file-upload'>
+                            <label htmlFor='file-upload-3'>
                                 <Button as='span' colorScheme='green' cursor='pointer'>
                                     Choose File(s)
                                 </Button>
                             </label>
-                            <Text ml={3} color='gray.500'>No file chosen</Text>
+                            <Text ml={3} color='gray.500'>{(!files3) ? "No file chosen" : "Files Selected"}</Text>
                         </Box>
                     </Td>
                     <Td>
@@ -401,6 +411,7 @@ export const UploadTable = () => {
                         : 
                         <Button colorScheme='blue'
                             onClick={()=>{
+                                if(!files3) return;
                                 setQueue((prev)=>{
                                     return [...prev, 3];
                                 })
@@ -423,7 +434,7 @@ export const UploadTable = () => {
                         <Box display='flex' alignItems='center'>
                             <Input
                                 type='file'
-                                id='file-upload'
+                                id='file-upload-4'
                                 display='none'
                                 multiple
                                 onChange={(e)=>{
@@ -431,12 +442,12 @@ export const UploadTable = () => {
                                 }}
                                 accept='.pdf'
                             />
-                            <label htmlFor='file-upload'>
+                            <label htmlFor='file-upload-4'>
                                 <Button as='span' colorScheme='green' cursor='pointer'>
                                     Choose File(s)
                                 </Button>
                             </label>
-                            <Text ml={3} color='gray.500'>No file chosen</Text>
+                            <Text ml={3} color='gray.500'>{(!files4) ? "No file chosen" : "Files Selected"}</Text>
                         </Box>
                     </Td>
                     <Td>
@@ -446,6 +457,7 @@ export const UploadTable = () => {
                         : 
                         <Button colorScheme='blue'
                             onClick={()=>{
+                                if(!files4) return;
                                 setQueue((prev)=>{
                                     return [...prev, 4];
                                 })

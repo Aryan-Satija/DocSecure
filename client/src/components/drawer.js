@@ -28,12 +28,15 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { apiConnector } from '../services/apiConnector';
 import { PROFILE_APIS } from '../services/profile_apis';
+import { useNavigate } from 'react-router-dom';
 
 export const SideDrawer = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [profile, setProfile] = useState(null);
     const btnRef = React.useRef()
     const {token} = useSelector(state => state.auth);
+    const navigate = useNavigate();
+
     useEffect(()=>{
       (async()=>{
         if(token){
@@ -99,9 +102,15 @@ export const SideDrawer = () => {
             <DrawerFooter className='w-full'>
                 <Tabs isFitted variant='enclosed' className='w-full'>
                     <TabList mb='1em' className='text-xs'>
-                        <Tab>Profile</Tab>
-                        <Tab>Create</Tab>
-                        <Tab>Validate</Tab>
+                        <Tab onClick={()=>{
+                          navigate("/profile")
+                        }}>Profile</Tab>
+                        <Tab onClick={()=>{
+                          navigate("/create")
+                        }}>Create</Tab>
+                        <Tab onClick={()=>{
+                          navigate("/validate")
+                        }}>Validate</Tab>
                     </TabList>
                 </Tabs>
             </DrawerFooter>

@@ -472,6 +472,7 @@ export const UploadTable = () => {
           <Tr>
             <Th>Name</Th>
             <Th>Upload</Th>
+            <Th>Status</Th>
           </Tr>
         </Tfoot>
       </Table>
